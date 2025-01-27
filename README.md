@@ -1,1 +1,26 @@
 # OpenCV - Getting started
+
+This is basic repository showing how to get started with OpenCV in Python and C++.
+
+### Python
+
+`pip install opencv-python`
+
+
+### C++
+
+To retrieve OpenCV for use with C++, either:
+
+#### Manually fetch OpenCV (preferred)
+Download from https://opencv.org/releases/
+Run self-extracting archive and extract to a suitable location
+Create an environmental variable named `OpenCV_DIR` pointing to `/build`
+Add `/bin` folder to PATH (e.g. `.../build/x64/vc16/bin`)
+
+#### Utilize vcpkg (using manifest mode)
+Call CMake with `-DCMAKE_TOOLCHAIN_FILE=[path to vcpkg]/scripts/buildsystems/vcpkg.cmake`
+
+> Under MinGW you'll need to specify the vcpkg triplet:
+>
+>-DVCPKG_TARGET_TRIPLET=x64-mingw-[static|dynamic]  # choose either `static` or `dynamic`. <br>
+>-DVCPKG_HOST_TRIPLET=x64-mingw-[static|dynamic]    # <-- needed only if MSVC cannot be found.
