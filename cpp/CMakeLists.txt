@@ -23,3 +23,6 @@ target_link_libraries(webcam PRIVATE ${OpenCV_LIBRARIES})
 
 add_executable(haarcascade haarcascade.cpp)
 target_link_libraries(haarcascade PRIVATE ${OpenCV_LIBRARIES})
+
+add_executable(canny canny.cpp)
+target_link_libraries(canny PRIVATE ${OpenCV_LIBRARIES})
