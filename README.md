@@ -12,10 +12,10 @@ This is basic repository showing how to get started with OpenCV in Python and C+
 To retrieve OpenCV for use with C++, either:
 
 #### Manually fetch OpenCV (preferred)
-Download from https://opencv.org/releases/
-Run self-extracting archive and extract to a suitable location
-Create an environmental variable named `OpenCV_DIR` pointing to `/build`
-Add `/bin` folder to PATH (e.g. `.../build/x64/vc16/bin`)
+1. Download from https://opencv.org/releases/
+2. Run self-extracting archive and extract to a suitable location
+3. Create an environmental variable named `OpenCV_DIR` pointing to `/build`
+4. Add `/bin` folder to PATH (e.g. `.../build/x64/vc16/bin`)
 
 #### Utilize vcpkg (using manifest mode)
 Call CMake with `-DCMAKE_TOOLCHAIN_FILE=[path to vcpkg]/scripts/buildsystems/vcpkg.cmake`

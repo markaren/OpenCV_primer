@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 3.17)
-project(opencv_cpp)
-
-set(CMAKE_CXX_STANDARD 20)
 
 if (WIN32)
     if (VCPKG_TARGET_TRIPLET)
@@ -16,7 +12,7 @@ find_package(OpenCV REQUIRED)
 add_subdirectory(third_party/aruco)
 
 # data files needs to be placed in a location fixed to the executable
-file(COPY "../data" DESTINATION "${CMAKE_BINARY_DIR}")
+file(COPY "../data" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
 
 add_executable(hello_world hello_world.cpp)
 target_link_libraries(hello_world PRIVATE ${OpenCV_LIBRARIES})
