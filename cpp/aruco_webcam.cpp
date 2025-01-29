@@ -2,6 +2,8 @@
 #include <opencv2/aruco.hpp>
 #include <iostream>
 
+constexpr bool flipImage = true;
+
 int main() {
     // Open the default camera
     cv::VideoCapture cap(0);
@@ -35,11 +37,23 @@ int main() {
 
         // Detect the markers
         std::vector<int> ids;
-        std::vector<std::vector<cv::Point2f>> corners, rejected;
+        std::vector<std::vector<cv::Point2f> > corners, rejected;
         detector.detectMarkers(gray, corners, ids, rejected);
+
+        if (flipImage) {
+            flip(image, image, 1);
+        }
 
         // Draw the detected markers on the image
         if (!ids.empty()) {
+            if (flipImage) {
+                // Flip the corners to match the flipped image
+                for (auto &corner: corners) {
+                    for (auto &point: corner) {
+                        point.x = image.cols - point.x; // Flip the x-coordinate
+                    }
+                }
+            }
             cv::aruco::drawDetectedMarkers(image, corners, ids);
         }
 
