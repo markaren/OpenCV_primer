@@ -13,6 +13,9 @@ endif()
 
 find_package(OpenCV REQUIRED)
 
+add_subdirectory(third_party/aruco)
+
+# data files needs to be placed in a location fixed to the executable
 file(COPY "../data" DESTINATION "${CMAKE_BINARY_DIR}")
 
 add_executable(hello_world hello_world.cpp)
@@ -26,3 +29,6 @@ target_link_libraries(haarcascade PRIVATE ${OpenCV_LIBRARIES})
 
 add_executable(canny canny.cpp)
 target_link_libraries(canny PRIVATE ${OpenCV_LIBRARIES})
+
+add_executable(arcuo_webcam aruco_webcam.cpp)
+target_link_libraries(arcuo_webcam PRIVATE ${OpenCV_LIBRARIES} aruco)
