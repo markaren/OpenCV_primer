@@ -11,6 +11,8 @@ if not cap.isOpened():
 while True:
     ret, image = cap.read()
 
+    image = cv2.flip(image, 1, image)
+
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # Define the dictionary of ArUco markers
