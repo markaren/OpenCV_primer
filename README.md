@@ -4,7 +4,7 @@ This is basic repository showing how to get started with OpenCV in Python and C+
 
 ### Python
 
-`pip install opencv-python`
+`pip install opencv-python opencv-contrib-python`
 
 
 ### C++
