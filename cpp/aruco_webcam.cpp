@@ -50,7 +50,7 @@ int main() {
                 // Flip the corners to match the flipped image
                 for (auto &corner: corners) {
                     for (auto &point: corner) {
-                        point.x = image.cols - point.x; // Flip the x-coordinate
+                        point.x = static_cast<float>(image.cols) - point.x; // Flip the x-coordinate
                     }
                 }
             }
