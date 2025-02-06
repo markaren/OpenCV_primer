@@ -3,7 +3,45 @@
 #include <iostream>
 #include <filesystem>
 
+class FaceDetector {
+public:
+    FaceDetector(const cv::CascadeClassifier &face_cascade, const cv::CascadeClassifier &eye_cascade)
+        : face_cascade(face_cascade),
+          eye_cascade(eye_cascade) {
+    }
+
+    void detect(cv::Mat& img) {
+        // Convert into grayscale
+        cv::Mat gray;
+        cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+
+        // Detect faces
+        std::vector<cv::Rect> faces;
+        face_cascade.detectMultiScale(gray, faces, 1.1, 4);
+
+        // Draw rectangle around the faces and detect eyes
+        for (const auto &face: faces) {
+            rectangle(img, face, cv::Scalar(255, 0, 0), 2);
+            cv::Mat roi_gray = gray(face);
+            cv::Mat roi_color = img(face);
+
+            std::vector<cv::Rect> eyes;
+            eye_cascade.detectMultiScale(roi_gray, eyes);
+
+            for (const auto &eye: eyes) {
+                rectangle(roi_color, eye, cv::Scalar(0, 255, 0), 2);
+            }
+        }
+    }
+
+private:
+    cv::CascadeClassifier face_cascade;
+    cv::CascadeClassifier eye_cascade;
+};
+
 int main() {
+    setLogLevel(cv::utils::logging::LOG_LEVEL_SILENT);
+
     // Define the data folders
     std::filesystem::path data_folder = "data";
     std::filesystem::path image_folder = data_folder / "images";
@@ -28,27 +66,8 @@ int main() {
         return 1;
     }
 
-    // Convert into grayscale
-    cv::Mat gray;
-    cvtColor(img, gray, cv::COLOR_BGR2GRAY);
-
-    // Detect faces
-    std::vector<cv::Rect> faces;
-    face_cascade.detectMultiScale(gray, faces, 1.1, 4);
-
-    // Draw rectangle around the faces and detect eyes
-    for (const auto &face: faces) {
-        rectangle(img, face, cv::Scalar(255, 0, 0), 2);
-        cv::Mat roi_gray = gray(face);
-        cv::Mat roi_color = img(face);
-
-        std::vector<cv::Rect> eyes;
-        eye_cascade.detectMultiScale(roi_gray, eyes);
-
-        for (const auto &eye: eyes) {
-            rectangle(roi_color, eye, cv::Scalar(0, 255, 0), 2);
-        }
-    }
+    FaceDetector detector(face_cascade, eye_cascade);
+    detector.detect(img);
 
     // Display the output
     imshow("img", img);
