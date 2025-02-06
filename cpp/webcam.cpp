@@ -3,6 +3,8 @@
 #include <iostream>
 
 int main() {
+    setLogLevel(cv::utils::logging::LOG_LEVEL_SILENT);
+
     cv::VideoCapture cap(0);
 
     if (!cap.isOpened()) {
@@ -21,5 +23,4 @@ int main() {
             break;
         }
     }
-
 }

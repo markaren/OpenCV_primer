@@ -5,6 +5,8 @@
 
 int main() {
 
+    setLogLevel(cv::utils::logging::LOG_LEVEL_SILENT);
+
     bool flipImage = true;
 
     // Open the default camera
