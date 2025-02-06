@@ -2,9 +2,11 @@
 #include <opencv2/aruco.hpp>
 #include <iostream>
 
-constexpr bool flipImage = true;
 
 int main() {
+
+    bool flipImage = true;
+
     // Open the default camera
     cv::VideoCapture cap(0);
 
@@ -64,6 +66,8 @@ int main() {
         const auto key = cv::waitKey(1);
         if (key == 27 || key == 'q') {
             break;
+        } else if (key == 'f') {
+            flipImage = !flipImage;
         }
     }
 
