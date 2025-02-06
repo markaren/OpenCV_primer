@@ -14,18 +14,18 @@ int main() {
     cv::CascadeClassifier eye_cascade;
     if (!face_cascade.load((cascades_folder / "haarcascade_frontalface_default.xml").string())) {
         std::cerr << "Error loading face cascade" << std::endl;
-        return -1;
+        return 1;
     }
     if (!eye_cascade.load((cascades_folder / "haarcascade_eye.xml").string())) {
         std::cerr << "Error loading eye cascade" << std::endl;
-        return -1;
+        return 1;
     }
 
     // Read the input image
     cv::Mat img = cv::imread((image_folder / "Lenna.png").string());
     if (img.empty()) {
         std::cerr << "Error loading image" << std::endl;
-        return -1;
+        return 1;
     }
 
     // Convert into grayscale

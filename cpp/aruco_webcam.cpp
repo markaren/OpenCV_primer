@@ -10,7 +10,7 @@ int main() {
 
     if (!cap.isOpened()) {
         std::cerr << "Could not open camera" << std::endl;
-        return -1;
+        return 1;
     }
 
     // Define the dictionary of ArUco markers

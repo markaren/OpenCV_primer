@@ -7,6 +7,7 @@ int main() {
 
     if (!cap.isOpened()) {
         std::cerr << "Error: Unable to open camera" << std::endl;
+        return 1;
     }
 
     namedWindow("Webcam", cv::WINDOW_AUTOSIZE);
